@@ -4,3 +4,4 @@
 - 2025-05-05: Fixed duplicate nested style tag in index.html (invalid HTML), committed and pushed.
 - 2025-05-09: Added Open Graph and Twitter Card meta tags for better social sharing, pushed.
 - 2025-04-10: Added smooth scrolling for anchor links via CSS scroll-behavior, pushed.
+- 2025-06-02: Added dark mode support via prefers-color-scheme media query, pushed.

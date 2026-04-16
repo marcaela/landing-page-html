@@ -6,5 +6,5 @@
 
 Date: 2023-11-15
 
-## 2025-04-15
-- Refactored inline form validation into reusable fields object with validateField helper, improved accessibility with aria-invalid attributes
+## 2025-04-16
+- Extracted inline JS from index.html into separate script.js file for better maintainability

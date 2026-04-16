@@ -105,59 +105,6 @@
     <p>&copy; <span id="year"></span> Your Company. All rights reserved.</p>
     <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
   </footer>
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-    
-    // Back to top button functionality
-    const backToTopButton = document.getElementById('backToTop');
-    
-    // Show/hide button based on scroll position
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 300) {
-        backToTopButton.classList.add('visible');
-      } else {
-        backToTopButton.classList.remove('visible');
-      }
-    });
-    
-    // Scroll to top when button is clicked
-    backToTopButton.addEventListener('click', (e) => {
-      e.preventDefault();
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    });
-    
-    // Contact form validation and submission
-    const form = document.getElementById('contactForm');
-    const fields = {
-      name: { el: document.getElementById('name'), error: document.getElementById('nameError'), validate: v => v.length >= 2 ? '' : 'Name must be at least 2 characters' },
-      email: { el: document.getElementById('email'), error: document.getElementById('emailError'), validate: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? '' : 'Please enter a valid email' },
-      message: { el: document.getElementById('message'), error: document.getElementById('messageError'), validate: v => v.length >= 10 ? '' : 'Message must be at least 10 characters' }
-    };
-    
-    function validateField(name) {
-      const field = fields[name];
-      const value = field.el.value.trim();
-      const err = field.validate(value);
-      field.error.textContent = err;
-      field.el.setAttribute('aria-invalid', !!err);
-      return !err;
-    }
-    
-    Object.keys(fields).forEach(name => {
-      fields[name].el.addEventListener('blur', () => validateField(name));
-      fields[name].el.addEventListener('input', () => { if (fields[name].error.textContent) validateField(name); });
-    });
-    
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const valid = Object.keys(fields).every(name => validateField(name));
-      if (valid) {
-        alert('Thank you! Your message has been sent.');
-        form.reset();
-      }
-    });</script>
+    <script src="script.js"></script>
 </body>
 </html>

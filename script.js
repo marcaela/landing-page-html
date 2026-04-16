@@ -1,0 +1,59 @@
+// Set current year
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// Back to top button functionality
+const backToTopButton = document.getElementById('backToTop');
+
+window.addEventListener('scroll', () => {
+  backToTopButton.classList.toggle('visible', window.scrollY > 300);
+});
+
+backToTopButton.addEventListener('click', (e) => {
+  e.preventDefault();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// Contact form validation
+const form = document.getElementById('contactForm');
+const fields = {
+  name: {
+    el: document.getElementById('name'),
+    error: document.getElementById('nameError'),
+    validate: v => v.length >= 2 ? '' : 'Name must be at least 2 characters'
+  },
+  email: {
+    el: document.getElementById('email'),
+    error: document.getElementById('emailError'),
+    validate: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? '' : 'Please enter a valid email'
+  },
+  message: {
+    el: document.getElementById('message'),
+    error: document.getElementById('messageError'),
+    validate: v => v.length >= 10 ? '' : 'Message must be at least 10 characters'
+  }
+};
+
+function validateField(name) {
+  const field = fields[name];
+  const value = field.el.value.trim();
+  const err = field.validate(value);
+  field.error.textContent = err;
+  field.el.setAttribute('aria-invalid', !!err);
+  return !err;
+}
+
+Object.keys(fields).forEach(name => {
+  const input = fields[name].el;
+  input.addEventListener('blur', () => validateField(name));
+  input.addEventListener('input', () => {
+    if (fields[name].error.textContent) validateField(name);
+  });
+});
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  if (Object.keys(fields).every(name => validateField(name))) {
+    alert('Thank you! Your message has been sent.');
+    form.reset();
+  }
+});

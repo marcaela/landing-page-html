@@ -11,3 +11,4 @@ Date: 2023-11-15
 
 ## 2025-04-18
 - Added SVG favicon (favicon.svg) replacing the missing .ico file for better scalability
+- Removed nonexistent handleSubmit handler from form (index.html)

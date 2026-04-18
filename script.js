@@ -39,6 +39,7 @@ function validateField(name) {
   const err = field.validate(value);
   field.error.textContent = err;
   field.el.setAttribute('aria-invalid', !!err);
+  field.el.style.borderColor = err ? '#e74c3c' : value ? '#27ae60' : '';
   return !err;
 }
 
@@ -52,8 +53,10 @@ Object.keys(fields).forEach(name => {
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  if (Object.keys(fields).every(name => validateField(name))) {
+  const allValid = Object.keys(fields).every(name => validateField(name));
+  if (allValid) {
     alert('Thank you! Your message has been sent.');
     form.reset();
+    Object.values(fields).forEach(f => { f.el.style.borderColor = ''; });
   }
 });

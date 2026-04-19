@@ -6,3 +6,4 @@
 - 2025-04-10: Added smooth scrolling for anchor links via CSS scroll-behavior, pushed.
 - 2025-06-02: Added dark mode support via prefers-color-scheme media query, pushed.
 - 2025-06-06: Added contact section styles with form inputs and dark mode support, pushed.
+- 2025-06-08: Added aria-describedby attributes on form inputs for screen reader error announcements, pushed.

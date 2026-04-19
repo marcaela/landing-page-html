@@ -77,24 +77,24 @@
   <section class="cta" id="get-started">
     <h2>Ready to start?</h2>
     <p style="margin: 1rem 0 2rem;">Join thousands of satisfied users today.</p>
-    <a href="#" class="btn">Sign Up Free</a>
+    <a href="#" class="btn" aria-label="Sign up for free">Sign Up Free</a>
   </section>
     <section class="contact-section">
       <h2>Contact Us</h2>
       <form id="contactForm">
         <div class="form-group">
           <label for="name">Name</label>
-          <input type="text" id="name" name="name" required />
+          <input type="text" id="name" name="name" required aria-describedby="nameError" />
           <span class="error" id="nameError"></span>
         </div>
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" id="email" name="email" required />
+          <input type="email" id="email" name="email" required aria-describedby="emailError" />
           <span class="error" id="emailError"></span>
         </div>
         <div class="form-group">
           <label for="message">Message</label>
-          <textarea id="message" name="message" required></textarea>
+          <textarea id="message" name="message" required aria-describedby="messageError"></textarea>
           <span class="error" id="messageError"></span>
         </div>
         <button type="submit" class="btn">Send Message</button>

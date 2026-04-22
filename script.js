@@ -29,6 +29,7 @@ loadFormData();
 
 // Back to top button functionality
 const backToTopButton = document.getElementById('backToTop');
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 window.addEventListener('scroll', () => {
   backToTopButton.classList.toggle('visible', window.scrollY > 300);
@@ -36,7 +37,11 @@ window.addEventListener('scroll', () => {
 
 backToTopButton.addEventListener('click', (e) => {
   e.preventDefault();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (prefersReducedMotion) {
+    window.scrollTo(0, 0);
+  } else {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 });
 
 // Contact form validation

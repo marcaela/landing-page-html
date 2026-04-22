@@ -46,6 +46,11 @@
       .card { background: #2a2a2a; }
       .cta { background: #222; }
       .form-group input, .form-group textarea { background: #2a2a2a; border-color: #444; color: #e0e0e0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .btn, .back-to-top { transition: none; }
+    }
   </style>
 </head>
 <body>

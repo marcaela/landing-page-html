@@ -1,6 +1,32 @@
 // Set current year
 document.getElementById('year').textContent = new Date().getFullYear();
 
+// Load saved form data
+const STORAGE_KEY = 'landing-form-data';
+function loadFormData() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      const data = JSON.parse(saved);
+      Object.keys(data).forEach(key => {
+        const el = document.getElementById(key);
+        if (el) el.value = data[key];
+      });
+    }
+  } catch (e) {}
+}
+function saveFormData() {
+  try {
+    const data = {};
+    ['name', 'email', 'message'].forEach(key => {
+      const el = document.getElementById(key);
+      if (el) data[key] = el.value;
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  } catch (e) {}
+}
+loadFormData();
+
 // Back to top button functionality
 const backToTopButton = document.getElementById('backToTop');
 
@@ -48,6 +74,7 @@ Object.keys(fields).forEach(name => {
   input.addEventListener('blur', () => validateField(name));
   input.addEventListener('input', () => {
     if (fields[name].error.textContent) validateField(name);
+    saveFormData();
   });
 });
 
@@ -57,6 +84,7 @@ form.addEventListener('submit', (e) => {
   if (allValid) {
     alert('Thank you! Your message has been sent.');
     form.reset();
+    localStorage.removeItem(STORAGE_KEY);
     Object.values(fields).forEach(f => { f.el.style.borderColor = ''; });
   }
 });

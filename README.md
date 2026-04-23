@@ -9,7 +9,9 @@ A simple, responsive landing page template with:
 
 ## Features
 - Responsive design (mobile-friendly)
-- Dark theme toggle via prefers-color-scheme
+- Dark theme toggle via `prefers-color-scheme`
+- Form data persists across refreshes via localStorage
+- Accessibility: keyboard focus styles, `prefers-reduced-motion` support
 - Optimized for social sharing
 
 ## How to Use
@@ -17,5 +19,5 @@ A simple, responsive landing page template with:
 2. Open `index.html` in browser
 3. Customize content in HTML/JS sections
 
-## dark mode
+## Dark Mode
 Activated automatically based on `prefers-color-scheme` media query.

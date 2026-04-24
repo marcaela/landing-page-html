@@ -10,3 +10,4 @@
 - 2026-04-22: Added localStorage to persist form data (persists input across refresh), pushed.
 - 2026-06-08: Added prefers-reduced-motion support for accessibility (CSS + JS), pushed.
 - 2026-04-22: Updated README with recent features (localStorage form persistence, accessibility improvements) and fixed Dark Mode heading case.
+- 2026-04-22: Added local development section to README with static server commands, pushed.

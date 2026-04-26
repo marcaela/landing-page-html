@@ -11,3 +11,5 @@
 - 2026-06-08: Added prefers-reduced-motion support for accessibility (CSS + JS), pushed.
 - 2026-04-22: Updated README with recent features (localStorage form persistence, accessibility improvements) and fixed Dark Mode heading case.
 - 2026-04-22: Added local development section to README with static server commands, pushed.- 2026-04-26: feat: replace alert with inline success message for contact form, pushed.
+- 2026-04-26: accessibility: add aria-live and role to form success message for screen readers
+Improvement made: Added ARIA attributes to form success message for screen reader accessibility.

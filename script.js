@@ -87,9 +87,14 @@ form.addEventListener('submit', (e) => {
   e.preventDefault();
   const allValid = Object.keys(fields).every(name => validateField(name));
   if (allValid) {
-    alert('Thank you! Your message has been sent.');
-    form.reset();
-    localStorage.removeItem(STORAGE_KEY);
-    Object.values(fields).forEach(f => { f.el.style.borderColor = ''; });
+    const successMessage = document.getElementById('formSuccess');
+    successMessage.textContent = 'Thank you! Your message has been sent.';
+    successMessage.style.display = 'block';
+    setTimeout(() => {
+      form.reset();
+      localStorage.removeItem(STORAGE_KEY);
+      Object.values(fields).forEach(f => { f.el.style.borderColor = ''; });
+      successMessage.style.display = 'none';
+    }, 2000);
   }
 });

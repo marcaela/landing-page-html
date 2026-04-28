@@ -90,11 +90,13 @@ form.addEventListener('submit', (e) => {
     const successMessage = document.getElementById('formSuccess');
     successMessage.textContent = 'Thank you! Your message has been sent.';
     successMessage.style.display = 'block';
+    successMessage.focus();
     setTimeout(() => {
       form.reset();
       localStorage.removeItem(STORAGE_KEY);
       Object.values(fields).forEach(f => { f.el.style.borderColor = ''; });
       successMessage.style.display = 'none';
+      form.querySelector('button[type="submit"]').focus();
     }, 2000);
   }
 });

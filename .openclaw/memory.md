@@ -13,3 +13,4 @@
 - 2026-04-22: Added local development section to README with static server commands, pushed.- 2026-04-26: feat: replace alert with inline success message for contact form, pushed.
 - 2026-04-26: accessibility: add aria-live and role to form success message for screen readers
 Improvement made: Added ARIA attributes to form success message for screen reader accessibility.
+2025-04-28: Added focus management to form success message for better accessibility.

@@ -91,12 +91,30 @@ form.addEventListener('submit', (e) => {
     successMessage.textContent = 'Thank you! Your message has been sent.';
     successMessage.style.display = 'block';
     successMessage.focus();
-    setTimeout(() => {
+    
+    // Allow dismissing with Escape key or click
+    const dismissSuccess = () => {
+      successMessage.removeEventListener('click', dismissSuccess);
+      successMessage.removeEventListener('keydown', dismissSuccess);
       form.reset();
       localStorage.removeItem(STORAGE_KEY);
       Object.values(fields).forEach(f => { f.el.style.borderColor = ''; });
       successMessage.style.display = 'none';
       form.querySelector('button[type="submit"]').focus();
+    };
+    
+    successMessage.addEventListener('click', dismissSuccess);
+    successMessage.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        dismissSuccess();
+      }
+    });
+    
+    // Auto-dismiss after 2 seconds if not dismissed earlier
+    setTimeout(() => {
+      if (successMessage.style.display === 'block') {
+        dismissSuccess();
+      }
     }, 2000);
   }
 });

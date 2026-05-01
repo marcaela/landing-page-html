@@ -16,3 +16,4 @@ Improvement made: Added ARIA attributes to form success message for screen reade
 2025-04-28: Added focus management to form success message for better accessibility.
 - 2026-04-29: accessibility: add aria-live='polite' to error spans for screen readers
 - 2026-04-30: feat: allow dismissing form success message via Escape key or click
+- 2026-05-01: perf: debounce form data saving to reduce localStorage writes, pushed.

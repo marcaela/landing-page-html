@@ -25,6 +25,23 @@ function saveFormData() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   } catch (e) {}
 }
+
+// Debounce function to limit rate of function calls
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+// Create debounced version of saveFormData (300ms delay)
+const debouncedSaveFormData = debounce(saveFormData, 300);
+
 loadFormData();
 
 // Back to top button functionality
@@ -79,7 +96,7 @@ Object.keys(fields).forEach(name => {
   input.addEventListener('blur', () => validateField(name));
   input.addEventListener('input', () => {
     if (fields[name].error.textContent) validateField(name);
-    saveFormData();
+    debouncedSaveFormData();
   });
 });
 

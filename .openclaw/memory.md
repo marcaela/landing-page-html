@@ -17,3 +17,4 @@ Improvement made: Added ARIA attributes to form success message for screen reade
 - 2026-04-29: accessibility: add aria-live='polite' to error spans for screen readers
 - 2026-04-30: feat: allow dismissing form success message via Escape key or click
 - 2026-05-01: perf: debounce form data saving to reduce localStorage writes, pushed.
+- 2025-05-02: Added throttle utility and applied it to scroll handler for back-to-top button; reduces scroll handler invocations and improves performance.

@@ -39,6 +39,18 @@ function debounce(func, wait) {
   };
 }
 
+// Throttle function to ensure at most one call per wait period
+function throttle(func, wait) {
+  let pending = false;
+  return function(...args) {
+    if (!pending) {
+      pending = true;
+      func(...args);
+      setTimeout(() => pending = false, wait);
+    }
+  };
+}
+
 // Create debounced version of saveFormData (300ms delay)
 const debouncedSaveFormData = debounce(saveFormData, 300);
 
@@ -48,9 +60,9 @@ loadFormData();
 const backToTopButton = document.getElementById('backToTop');
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-window.addEventListener('scroll', () => {
+window.addEventListener('scroll', throttle(() => {
   backToTopButton.classList.toggle('visible', window.scrollY > 300);
-});
+}, 100));
 
 backToTopButton.addEventListener('click', (e) => {
   e.preventDefault();

@@ -1,14 +1,23 @@
+// Configuration constants
+const CONFIG = {
+  SCROLL_THRESHOLD: 300,          // Pixels scrolled before showing back-to-top button
+  THROTTLE_WAIT: 100,             // ms between scroll handler invocations
+  DEBOUNCE_WAIT: 300,             // ms to wait before saving form data
+  STORAGE_KEY: 'landing-form-data',// localStorage key for form persistence
+  fields: ['name', 'email', 'message'],
+  SUCCESS_AUTODISMISS_MS: 2000    // Time before success message auto-dismisses
+};
+
 // Set current year
 document.getElementById('year').textContent = new Date().getFullYear();
 
 // Load saved form data
-const STORAGE_KEY = 'landing-form-data';
 function loadFormData() {
   try {
-    const saved = localStorage.getItem(STORAGE_KEY);
+    const saved = localStorage.getItem(CONFIG.STORAGE_KEY);
     if (saved) {
       const data = JSON.parse(saved);
-      Object.keys(data).forEach(key => {
+      CONFIG.fields.forEach(key => {
         const el = document.getElementById(key);
         if (el) el.value = data[key];
       });
@@ -18,11 +27,11 @@ function loadFormData() {
 function saveFormData() {
   try {
     const data = {};
-    ['name', 'email', 'message'].forEach(key => {
+    CONFIG.fields.forEach(key => {
       const el = document.getElementById(key);
       if (el) data[key] = el.value;
     });
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify(data));
   } catch (e) {}
 }
 
@@ -51,8 +60,8 @@ function throttle(func, wait) {
   };
 }
 
-// Create debounced version of saveFormData (300ms delay)
-const debouncedSaveFormData = debounce(saveFormData, 300);
+// Create debounced version of saveFormData
+const debouncedSaveFormData = debounce(saveFormData, CONFIG.DEBOUNCE_WAIT);
 
 loadFormData();
 
@@ -61,8 +70,8 @@ const backToTopButton = document.getElementById('backToTop');
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 window.addEventListener('scroll', throttle(() => {
-  backToTopButton.classList.toggle('visible', window.scrollY > 300);
-}, 100));
+  backToTopButton.classList.toggle('visible', window.scrollY > CONFIG.SCROLL_THRESHOLD);
+}, CONFIG.THROTTLE_WAIT));
 
 backToTopButton.addEventListener('click', (e) => {
   e.preventDefault();
@@ -126,7 +135,7 @@ form.addEventListener('submit', (e) => {
       successMessage.removeEventListener('click', dismissSuccess);
       successMessage.removeEventListener('keydown', dismissSuccess);
       form.reset();
-      localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem(CONFIG.STORAGE_KEY);
       Object.values(fields).forEach(f => { f.el.style.borderColor = ''; });
       successMessage.style.display = 'none';
       form.querySelector('button[type="submit"]').focus();
@@ -139,11 +148,11 @@ form.addEventListener('submit', (e) => {
       }
     });
     
-    // Auto-dismiss after 2 seconds if not dismissed earlier
+    // Auto-dismiss after CONFIG.SUCCESS_AUTODISMISS_MS if not dismissed earlier
     setTimeout(() => {
       if (successMessage.style.display === 'block') {
         dismissSuccess();
       }
-    }, 2000);
+    }, CONFIG.SUCCESS_AUTODISMISS_MS);
   }
 });

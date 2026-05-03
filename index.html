@@ -43,6 +43,8 @@
     .form-group .error { color: #e74c3c; font-size: 0.875rem; display: block; margin-top: 0.25rem; }
     .form-group label::after { content: ' *'; color: #e74c3c; }
     .form-success { color: #27ae60; background: #e8f5e9; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; display: none; }
+    /* Scroll progress indicator */
+    .scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 4px; background: linear-gradient(90deg, #667eea, #764ba2); z-index: 1000; transition: width 0.1s ease-out; }
     @media (prefers-color-scheme: dark) {
       body { background: #1a1a1a; color: #e0e0e0; }
       .card { background: #2a2a2a; }
@@ -52,11 +54,13 @@
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       .btn, .back-to-top { transition: none; }
+      .scroll-progress { display: none; }
     }
   </style>
 </head>
 <body>
   <a href="#main-content" class="skip-link" aria-label="Skip to main content" title="Skip to main content">Skip to content</a>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
   <section class="hero">
     <h1>Welcome</h1>
     <p>Your compelling headline goes here. Brief description of your product or service.</p>

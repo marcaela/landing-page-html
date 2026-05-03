@@ -67,11 +67,25 @@ loadFormData();
 
 // Back to top button functionality
 const backToTopButton = document.getElementById('backToTop');
+const scrollProgress = document.getElementById('scrollProgress');
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+function updateScrollProgress() {
+  const scrollTop = window.scrollY || document.documentElement.scrollTop;
+  const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+  scrollProgress.style.width = `${progress}%`;
+}
+
 window.addEventListener('scroll', throttle(() => {
+  if (!prefersReducedMotion) {
+    updateScrollProgress();
+  }
   backToTopButton.classList.toggle('visible', window.scrollY > CONFIG.SCROLL_THRESHOLD);
 }, CONFIG.THROTTLE_WAIT));
+
+// Initialize progress on load
+updateScrollProgress();
 
 backToTopButton.addEventListener('click', (e) => {
   e.preventDefault();
